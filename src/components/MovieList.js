@@ -1,19 +1,40 @@
 import movies from "../movies";
+//styles :
+import { ListWrapper } from "../styles";
 
-const MovieList = () => {
-  const movieList = movies.map((movie) => (
-    <div className="movie" key={movie.id}>
-      <img alt={movie.name} ClassName="MoviePoster" src={movie.poster} />
+//components:
+import MovieItem from "./MovieItem";
+import SearchBar from "./SearchBar";
 
-      <p className="Text">{movie.title} </p>
-      <p className="Text"> {movie.released}</p>
-      <p className="Text"> {movie.runtime} </p>
-      <p className="Text">{movie.genre} </p>
-      <p className="Text"> {movie.plot}</p>
-    </div>
+//State:
+import { useState } from "react";
+
+const MovieList = (props) => {
+  const [query, setQuery] = useState("");
+
+  const movieFilter = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(query.toLocaleLowerCase())
+  );
+  const movieList = movieFilter.map((movie) => (
+    <MovieItem
+      movie={movie}
+      setMovie={props.setMovie}
+      title={props.title}
+      key={movie.id}
+      released={props.released}
+      runtime={props.runtime}
+      genre={props.genre}
+      plot={props.plot}
+      poster={props.poster}
+    />
   ));
 
-  return <div>{movieList}</div>;
+  return (
+    <div>
+      <SearchBar setQuery={setQuery} />
+      <ListWrapper> {movieList}</ListWrapper>
+    </div>
+  );
 };
 
 export default MovieList;
