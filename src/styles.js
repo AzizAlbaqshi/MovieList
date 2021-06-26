@@ -8,17 +8,17 @@ color:            ${(props) => props.theme.mainColor};
 `;
 
 export const ListWrapper = styled.div`
-  display: block;
-  margin-left: 90px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 `;
 
 export const MovieWrapper = styled.div`
-  display: block;
-  margin: 5px;
-  padding: 5px;
-  float: left;
+  margin: auto;
+  width: fit-content;
+  padding: 20px;
   border: 3px solid whitesmoke;
-  margin-left: 10px;
 
   img {
     width: 150px;
@@ -42,6 +42,8 @@ export const ButtonTheme = styled.button`
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
+  margin-left: 50px;
 `;
 
 export const SearchBarStyled = styled.input`
@@ -72,9 +74,31 @@ export const DetailWrapper = styled.div`
 
   h4 {
     display: flex;
-    margin-top: 300px;
     text-align: justify;
     border: 1px solid yellow;
     padding: 5px;
+  }
+  button {
+    background-color: #a5a5a5;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  .button4 {
+    background-color: white;
+    color: black;
+    border: 2px solid #e7e7e7;
+  }
+
+  .button4:hover {
+    background-color: #e7e7e7;
   }
 `;

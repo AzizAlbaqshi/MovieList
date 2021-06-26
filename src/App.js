@@ -7,6 +7,10 @@ import { ThemeProvider } from "styled-components";
 import MovieList from "./components/MovieList";
 import MovieDetail from "./components/MovieDetail";
 import movies from "./movies";
+import Home from "./components/Home";
+
+//Labraries:
+import { Route, Switch } from "react-router";
 
 //State
 import { useState } from "react";
@@ -23,7 +27,7 @@ const theme = {
 };
 
 function App() {
-  const [movie, setMovie] = useState(movies[null]);
+  const [_movies, setMovies] = useState(movies);
   const [currentTheme, setCurrentTheme] = useState("light");
 
   const toggleTheme = () => {
@@ -31,25 +35,37 @@ function App() {
     else setCurrentTheme("light");
   };
 
-  const setView = () => {
-    return movie ? (
-      <MovieDetail movie={movie} />
-    ) : (
-      <MovieList setMovie={setMovie} />
-    );
-  };
+  // const setView = () => {
+  //   return movie ? (
+  //     <MovieDetail movie={movie} setMovie={setMovie} />
+  //   ) : (
+  //     <MovieList setMovie={setMovie} />
+  //   );
+  // };
 
   return (
     <div className="App">
       <div>
         <ThemeProvider theme={theme[currentTheme]}>
           <GlobalStyle />
-          <h1>Welcome to the Movie List WebPage </h1>
 
           <ButtonTheme onClick={toggleTheme}>
             {currentTheme === "light" ? "Light " : "Dark "}Mode
           </ButtonTheme>
-          {setView()}
+          {/* {setView()} */}
+          {/* <Home /> */}
+          <Switch>
+            <Route path="/:movieId">
+              <MovieDetail setMovies={setMovies} movies={_movies} />
+            </Route>
+            <Route exact path="/">
+              <Home />
+              <MovieList setMovies={setMovies} movies={_movies} />
+            </Route>
+            {/* <Route exact path="/">
+              <Home />
+            </Route> */}
+          </Switch>
         </ThemeProvider>
       </div>
     </div>
